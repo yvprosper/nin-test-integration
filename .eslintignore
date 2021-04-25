@@ -1,0 +1,4 @@
+node_modules
+dist
+src/interfaces/grpc/services-protos-nodejs
+docs

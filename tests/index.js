@@ -1,0 +1,3 @@
+exports.script = {
+  hello: "world",
+};

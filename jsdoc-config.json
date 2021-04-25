@@ -1,0 +1,23 @@
+{
+  "plugins": ["plugins/markdown"],
+  "markdown": {
+    "tags": ["example"]
+  },
+  "recurseDepth": 10,
+  "source": {
+    "includePattern": ".+\\.js(doc|x)?$",
+    "excludePattern": "(node_modules/|docs|src/interfaces/grpc/services-protos-nodejs/)"
+  },
+  "sourceType": "module",
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc", "closure"]
+  },
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false,
+    "default": {
+      "outputSourceFiles": false
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "watch": ["src", "test"],
+  "ext": ".js,.pug,.css",
+  "ignore": [],
+  "exec": "yarn start:dev",
+  "delay": "1000",
+  "events": {
+    "restart": "osascript -e 'display notification \"app restarted\" with title \"Nodemon\"'"
+  }
+}

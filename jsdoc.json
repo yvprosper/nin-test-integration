@@ -1,0 +1,15 @@
+{
+  "source": {
+    "include": ["./src"],
+    "includePattern": ".js$",
+    "excludePattern": "(node_modules/|docs|src/interfaces/grpc/services-protos-nodejs/)"
+  },
+  "plugins": ["plugins/markdown"],
+  "opts": {
+    "encoding": "utf8",
+    "readme": "./README.md",
+    "destination": "docs/",
+    "recurse": true,
+    "verbose": true
+  }
+}

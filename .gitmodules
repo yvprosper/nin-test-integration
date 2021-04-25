@@ -1,0 +1,3 @@
+[submodule "src/interfaces/grpc/services-protos-nodejs"]
+	path = src/interfaces/grpc/services-protos-nodejs
+	url = https://github.com/YouverifyHQ/services-protos-nodejs.git

@@ -1,0 +1,10 @@
+  
+client/
+node_modules/
+dist/
+plop-template/
+playground/
+tests/
+docs/
+.github/
+.env

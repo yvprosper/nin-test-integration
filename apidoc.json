@@ -1,0 +1,8 @@
+{
+  "name": "User Service",
+  "version": "1.0.0",
+  "description": "apiDoc for the User Service",
+  "title": "User Service API Documentation",
+  "url": "http://127.0.0.1:30027/v1",
+  "sampleUrl": "http://127.0.0.1:30027/v1"
+}

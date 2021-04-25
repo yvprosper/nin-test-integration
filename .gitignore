@@ -1,0 +1,14 @@
+/node_modules
+.env
+.history
+/dist
+/src/logs/access.log
+/temp
+/data
+.DS_Store
+npm-debug.log
+yarn-error.log
+.env.backup
+/playground
+.vscode
+.nyc_output

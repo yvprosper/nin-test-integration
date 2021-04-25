@@ -1,0 +1,22 @@
+{
+  "extends": ["airbnb-base", "prettier"],
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": ["error"],
+    "quotes": ["error", "double"],
+    "no-console": "off",
+    "no-async-promise-executor": "off",
+    "no-underscore-dangle": ["error", {
+      "allow": ["_id", "__v", "_require"]
+    }]
+  },
+  "settings": {
+    "import/resolver": {
+      "babel-module": {},
+      "node": {
+        "paths": ["src"],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  }
+}

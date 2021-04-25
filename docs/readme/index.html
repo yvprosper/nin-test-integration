@@ -1,0 +1,267 @@
+<style>
+/*!
+ * GitHub.com style
+ *
+ * GitHub Light v0.5.0
+ * https://github.com/primer/github-syntax-light
+ */
+
+ .hljs {
+  color: #24292e;
+  background: #ffffff;
+}
+
+.hljs-doctag,
+.hljs-keyword,
+.hljs-meta-keyword,
+.hljs-template-tag,
+.hljs-template-variable,
+.hljs-type {
+  /* prettylights-syntax-keyword */
+  color: #d73a49;
+}
+
+.hljs-title {
+  /* prettylights-syntax-entity */
+  color: #6f42c1;
+}
+
+.hljs-attr,
+.hljs-attribute,
+.hljs-literal,
+.hljs-meta,
+.hljs-number,
+.hljs-variable,
+.hljs-selector-attr,
+.hljs-selector-class,
+.hljs-selector-id {
+  /* prettylights-syntax-constant */
+  color: #005cc5;
+}
+
+.hljs-regexp,
+.hljs-string,
+.hljs-meta-string {
+  /* prettylights-syntax-string */
+  color: #032f62;
+}
+
+.hljs-built_in,
+.hljs-symbol,
+.hljs-title.hljs-class,
+.hljs-class .hljs-title {
+  /* prettylights-syntax-variable */
+  color: #e36209;
+}
+
+.hljs-comment,
+.hljs-code,
+.hljs-formula {
+  /* prettylights-syntax-comment */
+  color: #6a737d;
+}
+
+.hljs-name,
+.hljs-quote,
+.hljs-selector-tag,
+.hljs-selector-pseudo {
+  /* prettylights-syntax-entity-tag */
+  color: #22863a;
+}
+
+.hljs-subst {
+  /* prettylights-syntax-storage-modifier-import */
+  color: #24292e;
+}
+
+.hljs-section {
+  /* prettylights-syntax-markup-heading */
+  color: #005cc5;
+  font-weight: bold;
+}
+
+.hljs-bullet {
+  /* prettylights-syntax-markup-list */
+  color: #735c0f;
+}
+
+.hljs-emphasis {
+  /* prettylights-syntax-markup-italic */
+  color: #24292e;
+  font-style: italic;
+}
+
+.hljs-strong {
+  /* prettylights-syntax-markup-bold */
+  color: #24292e;
+  font-weight: bold;
+}
+
+.hljs-addition {
+  /* prettylights-syntax-markup-inserted */
+  color: #22863a;
+  background-color: #f0fff4;
+}
+
+.hljs-deletion {
+  /* prettylights-syntax-markup-deleted */
+  color: #b31d28;
+  background-color: #ffeef0;
+}
+
+</style><h1 id="user-service">User Service</h1>
+<blockquote>
+<p>RESTful/gRPC api with Domain Driven Design</p>
+</blockquote>
+<h2 id="development-environment-setup">Development Environment Setup</h2>
+<ol>
+<li> Make sure you have <code>nvm</code>, node <code>v12.18.3</code> or <code>LTS</code> version of node installed</li>
+<li> Install <code>yarn</code> - <code>npm install -g yarn</code>.</li>
+</ol>
+<h2 id="documentation">Documentation</h2>
+<ol>
+<li>Visit [<a href="http://localhost:30027/rest-api%5D">http://localhost:30027/rest-api]</a> for REST docs</li>
+<li>gRPC documentation should be added at the bottom of this readme. It can be access by visiting <a href="http://localhost:30027/readme">http://localhost:30027/readme</a></li>
+<li>This template documentation can be access by running <code>yarn serve:docs</code> then visit <a href="http://localhost:3000">http://localhost:3000</a></li>
+</ol>
+<h2 id="docker-support">Docker support</h2>
+<p><strong>Prerequisites</strong></p>
+<ol>
+<li><a href="https://www.docker.com/products/docker-engine">Docker</a> Community Edition v17 or higher</li>
+</ol>
+<pre><code class="language-sh">$ docker build -t user-service  .
+$ docker run -p 30027:30027 -p 30028:30028 --env-file=.env  user-service
+</code></pre>
+<p>Access <code>http://localhost:&lt;PORT&gt;</code> and you&#39;re ready to go!</p>
+<blockquote>
+<p><a href="http://localhost:30027/">http://localhost:30027/</a></p>
+</blockquote>
+<h2 id="quick-start">Quick Start</h2>
+<ol>
+<li>Clone the repository with <code>git clone --recursive https://github.com/YouverifyHQ/user-service.git</code></li>
+<li>Install the dependencies with <a href="https://yarnpkg.com/en/docs/install/">Yarn</a></li>
+<li>Run local Jaeger for distributed tracing <code>yarn start:jaeger:dev</code></li>
+<li>Run the application in development mode with <code>yarn start:dev:rs</code></li>
+<li>Access <code>http://localhost:&lt;PORT&gt;</code> and you&#39;re ready to go!<blockquote>
+<p><a href="http://localhost:30007">http://localhost:30007</a></p>
+</blockquote>
+</li>
+</ol>
+<h2 id="overview">Overview</h2>
+<ul>
+<li>uses Node.js &gt; v9</li>
+<li>written using ES6</li>
+<li>uses Yarn for package dependency management</li>
+<li>uses <a href="https://github.com/airbnb/javascript">Airbnb JavaScript Style</a></li>
+<li>uses <code>Mongoose</code> as ODM</li>
+<li>Filename convention - <code>camelCase</code></li>
+</ul>
+<h2 id="cli-tools">CLI Tools</h2>
+<ul>
+<li><code>yarn build</code> - build codebase for production</li>
+<li><code>yarn start:dev</code> - start the application in development mode</li>
+<li><code>yarn start:dev:rs</code> - start the application in development mode with nodemon for automatic server restart on code change</li>
+<li><code>yarn test</code> - run Unit tests</li>
+<li><code>yarn lint</code> - lint codebase using Airbnb style</li>
+<li><code>yarn lint:fix</code> - fix code according to Airbnb style</li>
+<li><code>yarn build:docs</code> - generate Rest API, Readme &amp; JSDC documenation</li>
+<li><code>yarn update:stub</code> - update submodules</li>
+<li><code>yarn start:jaeger:dev</code> - start a local Jaeger server and serve</li>
+<li><code>yarn stop:jaeger:dev</code> - stop a local Jaeger container</li>
+</ul>
+<h3 id="databases--messaging">Databases &amp; Messaging</h3>
+<ul>
+<li><a href="https://www.mongodb.com">Mongodb</a> - Main datastore</li>
+<li><a href="https://redis.io/">Redis</a> - In-memory datastore for caching</li>
+<li><a href="https://www.elastic.co/elasticsearch/">Elasticsearch</a> - Elasticsearch is a distributed, RESTful search and analytics engine</li>
+<li><a href="https://www.rabbitmq.com/">RabbitMq</a> - Message Broker</li>
+</ul>
+<h2 id="some-tech">Some Tech</h2>
+<ul>
+<li><p><a href="https://expressjs.com/">Express</a> - Node Framweork</p>
+</li>
+<li><p><a href="https://github.com/jeffijoe/awilix">Awilix</a> - dependency resolution support powered by <code>Proxy</code></p>
+</li>
+<li><p><a href="https://nodemon.io/">Nodemon</a> - Use for development file reload.</p>
+</li>
+<li><p><a href="https://github.com/expressjs/cors">CORS</a> - a node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options.</p>
+</li>
+<li><p><a href="https://github.com/expressjs/compression">Compression</a> - Node.js compression middleware.</p>
+</li>
+<li><p><a href="https://github.com/adaltas/node-http-status">Http-status</a> - Utility to interact with HTTP status code.</p>
+</li>
+<li><p><a href="https://github.com/winstonjs/winston">Winston</a> - A multi-transport async logging library for node.js.</p>
+</li>
+<li><p><a href="https://github.com/expressjs/morgan">Morgan</a> - HTTP request logger middleware for node.js</p>
+</li>
+<li><p><a href="https://lodash.com/">Lodash</a> - A modern JavaScript utility library delivering modularity, performance &amp; extras</p>
+</li>
+<li><p><a href="https://mongoosejs.com/">Mongoose</a> - Mongoose provides a straight-forward, schema-based solution to model your application data. It includes built-in type casting, validation, query building, business logic hooks and more, out of the box.</p>
+</li>
+<li><p><a href="https://chancejs.com/">Chance</a> - generate massive amounts of fake data in the browser and node.js</p>
+</li>
+<li><p><a href="https://momentjs.com/">Moment</a> - Parse, validate, manipulate, and display dates and times in JavaScript.</p>
+</li>
+<li><p><a href="https://momentjs.com/timezone/">Moment-timezone</a> - Parse and display dates in any timezone.</p>
+</li>
+<li><p><a href="https://apidocjs.com/">APIdocjs</a>- Inline Documentation for RESTful web APIs</p>
+</li>
+</ul>
+<h3 id="logging--tracing">Logging &amp; Tracing</h3>
+<ul>
+<li><a href="https://www.fluentd.org/">Fluentd</a> - Data collector for unified logging layer..</li>
+<li><a href="https://www.jaegertracing.io/">Jaeger</a> - end-to-end distributed tracing.
+Monitor and troubleshoot transactions in complex distributed systems</li>
+</ul>
+<h3 id="tests">Tests</h3>
+<ul>
+<li><a href="https://mochajs.org/">mocha</a> - JavaScript test framework running on Node.js and in the browser, making asynchronous testing simple and fun</li>
+<li><a href="http://chaijs.com/">chai</a> - a BDD / TDD assertion library for node and the browser that can be delightfully paired with any javascript testing framework.</li>
+<li><a href="https://github.com/visionmedia/supertest">supertest</a> - HTTP assertions made easy via superagent.</li>
+<li><a href="https://github.com/kentcdodds/cross-env">cross-env</a> - makes it so you can have a single command without worrying about setting or using the environment variable properly for the platform<ul>
+<li>We mainly use this so <strong>mocha</strong> can use the absolute path of files</li>
+</ul>
+</li>
+</ul>
+<h3 id="pre-commit">Pre-commit</h3>
+<p>Adding <code>pre-commit</code> to your project can be helpful to encourage consistency and quality of your code repository.</p>
+<ul>
+<li><a href="https://github.com/observing/pre-commit">pre-commit</a> - <strong>pre-commit</strong> is a pre-commit hook installer for <code>git</code>. It will ensure that your <code>yarn lint</code> (or other specified scripts) passes before you can commit your changes. This all conveniently configured in your <code>package.json</code>.</li>
+<li><a href="https://github.com/okonet/lint-staged">lint-staged</a> - Linting makes more sense when running before committing your code. By doing that you can ensure no errors are going into repository and enforce code style. But running a lint process on a whole project is slow and linting results can be irrelevant. Ultimately you only want to lint files that will be committed.</li>
+</ul>
+<h2 id="grpc-documentation">gRPC Documentation</h2>
+<ul>
+<li>gRPC Documentations here</li>
+</ul>
+<pre><code class="language-javascript"><span class="hljs-keyword">const</span> config = {
+  <span class="hljs-attr">httpPort</span>: {
+    <span class="hljs-attr">doc</span>: <span class="hljs-string">&quot;The rest port to bind&quot;</span>,
+    <span class="hljs-attr">format</span>: <span class="hljs-string">&quot;port&quot;</span>,
+    <span class="hljs-attr">default</span>: <span class="hljs-number">30007</span>,
+    <span class="hljs-attr">env</span>: <span class="hljs-string">&quot;HTTP_PORT&quot;</span>,
+    <span class="hljs-attr">sensitive</span>: <span class="hljs-literal">false</span>,
+  },
+  <span class="hljs-attr">grpcPort</span>: {
+    <span class="hljs-attr">doc</span>: <span class="hljs-string">&quot;The grpc port to bind&quot;</span>,
+    <span class="hljs-attr">format</span>: <span class="hljs-string">&quot;port&quot;</span>,
+    <span class="hljs-attr">default</span>: <span class="hljs-number">30015</span>,
+    <span class="hljs-attr">env</span>: <span class="hljs-string">&quot;GRPC_PORT&quot;</span>,
+    <span class="hljs-attr">sensitive</span>: <span class="hljs-literal">false</span>,
+  },
+  <span class="hljs-attr">env</span>: {
+    <span class="hljs-attr">doc</span>: <span class="hljs-string">&quot;The application environment&quot;</span>,
+    <span class="hljs-attr">format</span>: [<span class="hljs-string">&quot;production&quot;</span>, <span class="hljs-string">&quot;development&quot;</span>, <span class="hljs-string">&quot;test&quot;</span>, <span class="hljs-string">&quot;qa&quot;</span>, <span class="hljs-string">&quot;staging&quot;</span>, <span class="hljs-string">&quot;local&quot;</span>],
+    <span class="hljs-attr">default</span>: <span class="hljs-string">&quot;local&quot;</span>,
+    <span class="hljs-attr">env</span>: <span class="hljs-string">&quot;NODE_ENV&quot;</span>,
+    <span class="hljs-attr">sensitive</span>: <span class="hljs-literal">false</span>,
+  },
+};
+
+<span class="hljs-built_in">exports</span>.app = config;
+</code></pre>
+<h2 id="contributing">Contributing</h2>
+<p>This boilerplate is open to suggestions and contributions, documentation contributions are also important! :)</p>
+<h2 id="acknowledgments">Acknowledgments</h2>
+<p>This boilerplate is forked and modified from <a href="https://github.com/talyssonoc/node-api-boilerplate">node-api-boilerplate</a> - <a href="https://github.com/talyssonoc">Talysson de Oliveira Cassiano</a> :clap:</p>
+<h2 id="license">License</h2>
+<p>MIT License - fork, modify and use however you want.</p>
