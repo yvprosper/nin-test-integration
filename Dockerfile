@@ -44,6 +44,6 @@ COPY . .
 
 RUN NODE_ENV=production yarn build && yarn build:docs
 
-EXPOSE 30027 30028
+EXPOSE 30041 30042
 
 CMD [ "node", "dist/start.js" ]
