@@ -1,8 +1,8 @@
 {
-  "name": "User Service",
+  "name": "Raw Template Service",
   "version": "1.0.0",
-  "description": "apiDoc for the User Service",
-  "title": "User Service API Documentation",
-  "url": "http://127.0.0.1:30027/v1",
-  "sampleUrl": "http://127.0.0.1:30027/v1"
+  "description": "apiDoc for the Raw Template Service",
+  "title": "Raw Template Service API Documentation",
+  "url": "http://127.0.0.1:30041/v1",
+  "sampleUrl": "http://127.0.0.1:30042/v1"
 }
