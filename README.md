@@ -9,8 +9,8 @@
 
 ## Documentation
 
-1. Visit [http://localhost:30027/rest-api] for REST docs
-2. gRPC documentation should be added at the bottom of this readme. It can be access by visiting [http://localhost:30027/readme](http://localhost:30027/readme)
+1. Visit [http://localhost:30041/rest-api] for REST docs
+2. gRPC documentation should be added at the bottom of this readme. It can be access by visiting [http://localhost:30041/readme](http://localhost:30041/readme)
 3. This template documentation can be access by running `yarn serve:docs` then visit [http://localhost:3000](http://localhost:3000)
 
 ## Docker support
@@ -20,17 +20,17 @@
 1. [Docker](https://www.docker.com/products/docker-engine) Community Edition v17 or higher
 
 ```sh
-$ docker build -t user-service  .
-$ docker run -p 30027:30027 -p 30028:30028 --env-file=.env  user-service
+$ docker build -t raw-template  .
+$ docker run -p 30041:30041 -p 30042:30042 --env-file=.env  raw-template
 ```
 
 Access `http://localhost:<PORT>` and you're ready to go!
 
-> http://localhost:30027/
+> http://localhost:30041/
 
 ## Quick Start
 
-1. Clone the repository with `git clone --recursive https://github.com/YouverifyHQ/user-service.git`
+1. Clone the repository with `git clone --recursive https://github.com/YouverifyHQ/raw-template.git`
 2. Install the dependencies with [Yarn](https://yarnpkg.com/en/docs/install/)
 3. Run local Jaeger for distributed tracing `yarn start:jaeger:dev`
 4. Run the application in development mode with `yarn start:dev:rs`
