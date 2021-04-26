@@ -1,13 +1,15 @@
-export const queueTopology = (worker, config) => {
+import config from "config";
+
+export const queueTopology = (worker) => {
   const queuePrefix = config.get("rabbitmq.prefixKeyName");
-  const exchange = `${queuePrefix}.test.exchange`;
+  const exchange = `${queuePrefix}.exchange`;
   let topology;
   switch (worker) {
     case "test":
       topology = {
         queue: `${queuePrefix}.test.queue`,
         exchange,
-        routingKey: "test.send",
+        routingKey: "test.log",
       };
       break;
 

@@ -1,4 +1,4 @@
-// DOc - https://github.com/axios/axios#instance-methods
+// Documentation - https://github.com/axios/axios#instance-methods
 import axios from "axios";
 import tracing from "infra/tracer/tracer";
 

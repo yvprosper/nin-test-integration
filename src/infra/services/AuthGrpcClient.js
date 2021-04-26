@@ -10,7 +10,7 @@ class AuthGrpcClient {
     this.config = config;
     this.tracer = tracer;
     this.logSpanError = logSpanError;
-    this.hostport = this.config.get("auth.grpcHostPort");
+    this.hostport = this.config.get("app.authServiceGrpcHostPort");
     this.client = new ClientServices.AuthAPIClient(
       this.hostport,
       grpc.credentials.createInsecure()

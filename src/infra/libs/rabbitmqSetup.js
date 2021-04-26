@@ -1,12 +1,6 @@
 import amqp from "amqp-connection-manager";
 import config from "config";
-// import Logger from "infra/logging/Logger";
-// import container from "src/container";
 
-// const { logger, config } = container.cradle;
-
-// const logger = new Logger({ config });
-// console.log({ logger: logger.info });
 const logger = {
   info: console.info,
   error: console.error,
@@ -30,9 +24,9 @@ const connection = amqp.connect(connectionOptions);
 connection.on("connect", () => logger.info("RabbitMq is connected!"));
 connection.on("disconnect", () => logger.info("RabbitMq disconnected. Retrying..."));
 
-export const EXCHANGE_NAME = `${queuePrefix}.users.exchange`;
-export const USER_QUEUE = `${queuePrefix}.users.queue`;
-export const USER_ROUTING_KEY = "users.route";
+export const EXCHANGE_NAME = `${queuePrefix}.exchange`;
+export const QUEUE = `${queuePrefix}.queue`;
+export const ROUTING_KEY = `${queuePrefix}.route`;
 // Create a channel wrapper
 export const channelWrapper = connection.createChannel({
   json: true,
@@ -43,8 +37,8 @@ export const channelWrapper = connection.createChannel({
       channel.assertExchange(EXCHANGE_NAME, "topic", {
         durable: true,
       }),
-      channel.assertQueue(USER_QUEUE, { durable: true }),
-      channel.bindQueue(USER_QUEUE, EXCHANGE_NAME, USER_ROUTING_KEY),
+      channel.assertQueue(QUEUE, { durable: true }),
+      channel.bindQueue(QUEUE, EXCHANGE_NAME, ROUTING_KEY),
     ]);
   },
 });

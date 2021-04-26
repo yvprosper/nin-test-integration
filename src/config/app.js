@@ -48,6 +48,20 @@ const config = {
     env: "FRONTEND_BASE_URL",
     sensitive: false,
   },
+  authServiceGrpcHostPort: {
+    doc: "Auth service grpc hostport",
+    format: "*",
+    default: null,
+    env: "AUTH_SERVICE_GRPC_HOSTPORT",
+    sensitive: true,
+  },
+  auditLogGrpcHostPort: {
+    doc: "AuditLog service grpc hostport",
+    format: "*",
+    default: null,
+    env: "AUDITLOG_SERVICE_GRPC_HOSTPORT",
+    sensitive: true,
+  },
 };
 
 exports.app = config;

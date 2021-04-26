@@ -1,7 +1,14 @@
-import { GetATodoRequest, CreateTodoRequest } from "stubs/todo/messages_pb";
 import { VerifyTokenRequest } from "stubs/auth/messages_pb";
+import { LogEventRequest, DeviceInfo } from "stubs/auditlog/messages_pb";
 
-// eslint-disable-next-line import/prefer-default-export
+const createDeviceInfo = (data) => {
+  const deviceInfo = new DeviceInfo();
+  deviceInfo.setBrowser(data.browser);
+  deviceInfo.setOs(data.os);
+  deviceInfo.setVersion(data.version);
+  return deviceInfo;
+};
+
 export const createVerifyTokenRequest = (data) => {
   const verifyTokenRequest = new VerifyTokenRequest();
   verifyTokenRequest.setToken(data.token);
@@ -10,16 +17,17 @@ export const createVerifyTokenRequest = (data) => {
   return verifyTokenRequest;
 };
 
-export const createGetATodoRequest = (data) => {
-  const getAtodoRequest = new GetATodoRequest();
-  getAtodoRequest.setTodoId(data.todoId);
-  return getAtodoRequest;
-};
-
-export const createNewTodoRequest = (data) => {
-  const newTodoRequest = new CreateTodoRequest();
-  newTodoRequest.setNote(data.note);
-  newTodoRequest.setSubject(data.subject);
-  // NB: use conditional for optional parameter e.g if(data.dueDate) newTodorequest.setDueDate(data.dueDate)
-  return newTodoRequest;
+export const createLogEventRequest = (data) => {
+  const deviceInfo = createDeviceInfo(data.deviceInfo);
+  const logEventRequest = new LogEventRequest();
+  logEventRequest.setDeviceInfo(deviceInfo);
+  logEventRequest.setActivity(data.activity);
+  logEventRequest.setBusinessId(data.businessId);
+  logEventRequest.setBusinessType(data.businessType);
+  logEventRequest.setEvent(data.event);
+  logEventRequest.setIpAddress(data.ipAddress);
+  logEventRequest.setResource(data.resource);
+  logEventRequest.setUserId(data.userId);
+  logEventRequest.setEventDateTime(data.eventDateTime);
+  return logEventRequest;
 };

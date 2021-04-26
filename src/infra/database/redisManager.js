@@ -11,20 +11,6 @@ const redisManager = ({ config, logger }) => {
   const prefix = config.get("redis.prefixKeyName");
   const protocol = isTls ? "rediss://" : "redis://";
 
-  // let redisClient = redis.createClient({
-  //   host,
-  //   port,
-  //   username,
-  //   prefix,
-  //   password,
-  // });
-  // if (password) {
-  //   redisClient.auth(password, (error) => {
-  //     logger.error(error);
-  //   });
-  // }
-  // rediss://default:f0y8f0vrdtpwgeuv@db-redis-youid-do-user-2015149-0.b.db.ondigitalocean.com:25061
-
   let redisClient = redis.createClient(`${protocol}${username}:${password}@${host}:${port}`, {
     prefix,
   });

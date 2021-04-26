@@ -1,5 +1,6 @@
 /* eslint-disable no-await-in-loop */
 import { EXCHANGE_NAME, channelWrapper } from "./rabbitmqSetup";
+import { queueTopology } from "./queueTopology";
 
 const publishToRabitmq = (data) => {
   return new Promise(async (resolve, reject) => {
@@ -12,7 +13,8 @@ const publishToRabitmq = (data) => {
 
       if (dataToPublish.length > 0) {
         for (let i = 0; i < dataToPublish.length; i += 1) {
-          const { message, routingKey } = dataToPublish[i];
+          const { message, worker } = dataToPublish[i];
+          const { routingKey } = queueTopology(worker);
           console.log({ message, routingKey });
           await channelWrapper.publish(EXCHANGE_NAME, routingKey, message, {
             deliveryMode: 2,
