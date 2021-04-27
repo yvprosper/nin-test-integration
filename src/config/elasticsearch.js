@@ -27,11 +27,11 @@ const config = {
     env: "ELASTICSEARCH_PASSWORD",
     sensitive: true,
   },
-  prefixKeyName: {
-    doc: "Elasticsearch prefix key name",
+  indexName: {
+    doc: "Elasticsearch index name",
     format: "*",
     default: null,
-    env: "ELASTICSEARCH_KEY_PREFIX",
+    env: "ELASTICSEARCH_INDEX_NAME",
     sensitive: false,
   },
   isTls: {
