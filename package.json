@@ -19,7 +19,7 @@
     "lint": "TIMING=1 node_modules/.bin/eslint --ext .js src/",
     "lint:fix": "node_modules/.bin/eslint --fix --ext  .js .",
     "test": "yarn build && NODE_ENV=test node_modules/.bin/nyc mocha test/index.js --require @babel/register --exit",
-    "update:stub": "cd src/interfaces/grpc/services-protos-nodejs && git pull && cd ../../../..",
+    "update:stub": "cd src/interfaces/grpc/services-protos-nodejs && git pull origin master && cd ../../../..",
     "fresh-install": "rm -rf node_modules && yarn cache clean --force && yarn install",
     "start:jaeger:dev": "docker run -d --name jaeger -e COLLECTOR_ZIPKIN_HOST_PORT=:9411 -p 5775:5775/udp -p 6831:6831/udp -p 6832:6832/udp -p 5778:5778 -p 16686:16686 -p 14268:14268 -p 14250:14250 -p 9411:9411 jaegertracing/all-in-one:1.22 && open http://localhost:16686",
     "stop:jaeger:dev": "docker kill jaeger && docker rm jaeger"
