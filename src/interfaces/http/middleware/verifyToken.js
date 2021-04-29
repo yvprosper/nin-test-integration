@@ -1,4 +1,5 @@
 import { asValue } from "awilix";
+import UnauthorizedError from "interfaces/http/errors/Unauthorized";
 
 export default (tokenType = "jwt") => {
   return async (req, res, next) => {
@@ -21,7 +22,7 @@ export default (tokenType = "jwt") => {
       });
       next();
     } catch (error) {
-      next(error);
+      next(new UnauthorizedError(error.message));
     }
   };
 };

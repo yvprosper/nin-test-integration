@@ -1,5 +1,5 @@
 import { VerifyTokenRequest } from "stubs/auth/messages_pb";
-import { LogEventRequest, DeviceInfo } from "stubs/auditlog/messages_pb";
+import { PublishEventRequest, DeviceInfo } from "stubs/auditlog/messages_pb";
 
 const createDeviceInfo = (data) => {
   const deviceInfo = new DeviceInfo();
@@ -17,17 +17,16 @@ export const createVerifyTokenRequest = (data) => {
   return verifyTokenRequest;
 };
 
-export const createLogEventRequest = (data) => {
+export const createPublishEventRequest = (data) => {
   const deviceInfo = createDeviceInfo(data.deviceInfo);
-  const logEventRequest = new LogEventRequest();
-  logEventRequest.setDeviceInfo(deviceInfo);
-  logEventRequest.setActivity(data.activity);
-  logEventRequest.setBusinessId(data.businessId);
-  logEventRequest.setBusinessType(data.businessType);
-  logEventRequest.setEvent(data.event);
-  logEventRequest.setIpAddress(data.ipAddress);
-  logEventRequest.setResource(data.resource);
-  logEventRequest.setUserId(data.userId);
-  logEventRequest.setEventDateTime(data.eventDateTime);
-  return logEventRequest;
+  const publishEventRequest = new PublishEventRequest();
+  publishEventRequest.setDeviceInfo(deviceInfo);
+  publishEventRequest.setActivity(data.activity);
+  publishEventRequest.setBusinessId(data.businessId);
+  publishEventRequest.setBusinessType(data.businessType);
+  publishEventRequest.setEvent(data.event);
+  publishEventRequest.setIpAddress(data.ipAddress);
+  publishEventRequest.setResource(data.resource);
+  publishEventRequest.setUserId(data.userId);
+  return publishEventRequest;
 };

@@ -1,5 +1,5 @@
 import grpc from "grpc";
-import { createLogEventRequest } from "interfaces/grpc/requests";
+import { createPublishEventRequest } from "interfaces/grpc/requests";
 import ClientServices from "stubs/auditlog/service_grpc_pb";
 
 const opentracing = require("opentracing");
@@ -33,8 +33,8 @@ class AuditLogGrpcClient {
         this.tracer.inject(span, opentracing.FORMAT_TEXT_MAP, traceContext);
         const metadata = new grpc.Metadata();
         metadata.add("trace", JSON.stringify(traceContext));
-        const request = createLogEventRequest(payload);
-        this.client.logEvent(request, metadata, (error, response) => {
+        const request = createPublishEventRequest(payload);
+        this.client.publishEvent(request, metadata, (error, response) => {
           if (error) {
             reject(error);
             return;

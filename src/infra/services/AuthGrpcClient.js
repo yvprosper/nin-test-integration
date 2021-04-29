@@ -1,6 +1,6 @@
 import grpc from "grpc";
 import { createVerifyTokenRequest } from "interfaces/grpc/requests";
-import ClientServices from "stubs/auth/service_grpc_pb";
+import ClientServices from "stubs/user/service_grpc_pb";
 
 /**
  * class AuthGrpcClient
@@ -11,7 +11,7 @@ class AuthGrpcClient {
     this.tracer = tracer;
     this.logSpanError = logSpanError;
     this.hostport = this.config.get("app.authServiceGrpcHostPort");
-    this.client = new ClientServices.AuthAPIClient(
+    this.client = new ClientServices.UserAPIClient(
       this.hostport,
       grpc.credentials.createInsecure()
     );
