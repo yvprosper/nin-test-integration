@@ -1,5 +1,5 @@
 import grpc from "grpc";
-import { createVerifyTokenRequest } from "interfaces/grpc/requests";
+import { createVerifyTokenRequest, createGetManyUsersRequest } from "interfaces/grpc/requests";
 import ClientServices from "stubs/user/service_grpc_pb";
 
 /**
@@ -10,7 +10,7 @@ class AuthGrpcClient {
     this.config = config;
     this.tracer = tracer;
     this.logSpanError = logSpanError;
-    this.hostport = this.config.get("app.authServiceGrpcHostPort");
+    this.hostport = this.config.get("app.userServiceGrpcHostPort");
     this.client = new ClientServices.UserAPIClient(
       this.hostport,
       grpc.credentials.createInsecure()
@@ -34,6 +34,30 @@ class AuthGrpcClient {
           }
           const { success, user } = response.toObject();
           resolve({ success, user: JSON.parse(user) });
+        });
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  /**
+   * get many users
+   * @param {*} userIdsList
+   * @returns {Promise}
+   *
+   */
+  async getManyUsers(userIdsList) {
+    return new Promise((resolve, reject) => {
+      try {
+        const request = createGetManyUsersRequest(userIdsList);
+        this.client.getManyUsers(request, (error, response) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+          const { success, usersList } = response.toObject();
+          resolve({ success, usersList });
         });
       } catch (error) {
         reject(error);

@@ -41,7 +41,7 @@ container.loadModules(
     [
       "infra/repositories/*!(BaseRepository).js",
       {
-        lifetime: Lifetime.SCOPED,
+        lifetime: Lifetime.SINGLETON,
         register: asClass,
       },
     ],
@@ -60,7 +60,7 @@ container.loadModules(
     [
       "app/*/*!(index.js).js",
       {
-        lifetime: Lifetime.SCOPED,
+        lifetime: Lifetime.SINGLETON,
         register: asClass,
       },
     ],
@@ -79,7 +79,7 @@ container.loadModules(
     [
       "infra/services/*.js",
       {
-        lifetime: Lifetime.SCOPED,
+        lifetime: Lifetime.SINGLETON,
         register: asClass,
       },
     ],

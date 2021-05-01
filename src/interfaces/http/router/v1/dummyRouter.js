@@ -12,6 +12,7 @@ const validator = require("express-joi-validation").createValidator({
 const api = makeInvoker(DummyController);
 const router = express.Router();
 /*
+   * @apiIgnore
    * @api {post} /todos Create a todo
    * @apiGroup Todos
    * @apiDescription This endpoint creates a todo

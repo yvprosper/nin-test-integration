@@ -1,0 +1,164 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-underscore-dangle */
+class ElasticsearchQueryManager {
+  constructor(esClient) {
+    this.client = esClient;
+  }
+
+  async query({ index, query }, options) {
+    const { page = 1, limit = 20, sourceExcludes = [], sourceIncludes = [], sort = [] } = options;
+    const { body } = await this.client.search({
+      from: (page - 1) * limit,
+      size: limit,
+      sort,
+      _sourceExcludes: sourceExcludes,
+      _sourceIncludes: sourceIncludes,
+      index,
+      body: {
+        query,
+      },
+    });
+    const { hits, total } = body.hits;
+    const hasNextPage = total.value > page * limit;
+    const hasPrevPage = page > 1;
+    const totalDocs = total.value;
+    const docs = [];
+    for (const hit of hits) {
+      docs.push(hit._source);
+    }
+    return {
+      docs,
+      pagination: {
+        totalDocs,
+        perPage: limit,
+        currentPage: page,
+        totalPages: Math.ceil(totalDocs / limit),
+        serialNo: (page - 1) * limit + 1,
+        hasPrevPage,
+        hasNextPage,
+        prevPage: hasPrevPage ? page - 1 : null,
+        nextPage: hasNextPage ? page + 1 : null,
+      },
+    };
+  }
+
+  async update({ id, index, payload }) {
+    const { body } = await this.client.update({
+      index,
+      id,
+      body: {
+        doc: payload,
+      },
+    });
+
+    return body;
+  }
+
+  async index({ id, index, payload }) {
+    const { body } = await this.client.index({
+      index,
+      id,
+      body: payload,
+    });
+
+    return body;
+  }
+
+  async getById({ id, index }) {
+    const { body } = await this.client.get({
+      index,
+      id,
+    });
+
+    return body;
+  }
+
+  async reIndex({ sourceIndex, sourceIndexQuery = {}, sourceIndexScript = "", destinationIndex }) {
+    const { body } = await this.client.reindex({
+      waitForCompletion: true,
+      // refresh: true,
+      body: {
+        source: {
+          index: sourceIndex,
+          query: sourceIndexQuery,
+        },
+        dest: {
+          index: destinationIndex,
+        },
+        script: {
+          lang: "painless",
+          // source: "ctx._source.remove('house')",
+          source: sourceIndexScript,
+        },
+      },
+    });
+
+    return body;
+  }
+
+  async createMapping({ index }) {
+    const mappings = {
+      properties: {
+        activity: {
+          type: "text",
+        },
+        businessId: {
+          type: "keyword",
+        },
+        businessType: {
+          type: "keyword",
+        },
+        createdAt: {
+          type: "date",
+        },
+        deviceInfo: {
+          properties: {
+            browser: {
+              type: "text",
+            },
+            os: {
+              type: "text",
+            },
+            version: {
+              type: "text",
+            },
+          },
+        },
+        event: {
+          type: "keyword",
+        },
+        eventDateTime: {
+          type: "date",
+        },
+        ipAddress: {
+          type: "ip",
+          index: false,
+        },
+        lastModifiedAt: {
+          type: "date",
+        },
+        resource: {
+          type: "keyword",
+        },
+        userId: {
+          type: "text",
+        },
+      },
+    };
+
+    await this.client.indices.putMapping({
+      index,
+      body: mappings,
+    });
+  }
+
+  async createIndex({ index }) {
+    const { body: check } = await this.client.indices.exists({ index });
+    if (!check) {
+      await this.client.indices.create({ index });
+      await this.createMapping({ index });
+    }
+  }
+}
+
+export default ElasticsearchQueryManager;

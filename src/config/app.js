@@ -48,11 +48,11 @@ const config = {
     env: "FRONTEND_BASE_URL",
     sensitive: false,
   },
-  authServiceGrpcHostPort: {
-    doc: "Auth service grpc hostport",
+  userServiceGrpcHostPort: {
+    doc: "User service grpc hostport",
     format: "*",
     default: null,
-    env: "AUTH_SERVICE_GRPC_HOSTPORT",
+    env: "USER_SERVICE_GRPC_HOSTPORT",
     sensitive: true,
   },
   auditLogGrpcHostPort: {

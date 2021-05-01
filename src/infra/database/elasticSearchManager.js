@@ -1,8 +1,6 @@
 import { Client } from "@elastic/elasticsearch";
 
 const elasticsearchManager = ({ config, logger }) => {
-  //   const elasticsearchPrefixKey = config.get("elasticsearch.prefixKeyName");
-
   logger.info("Connecting to Elasticsearch database...");
 
   const elasticClient = new Client({
@@ -21,8 +19,6 @@ const elasticsearchManager = ({ config, logger }) => {
     requestTimeout: 60000,
     sniffOnStart: false,
   });
-
-  logger.info("Connected to Elasticsearch");
 
   return elasticClient;
 };

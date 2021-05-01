@@ -1,4 +1,4 @@
-import { VerifyTokenRequest } from "stubs/auth/messages_pb";
+import { VerifyTokenRequest, GetManyUsersRequest } from "stubs/user/messages_pb";
 import { PublishEventRequest, DeviceInfo } from "stubs/auditlog/messages_pb";
 
 const createDeviceInfo = (data) => {
@@ -22,11 +22,17 @@ export const createPublishEventRequest = (data) => {
   const publishEventRequest = new PublishEventRequest();
   publishEventRequest.setDeviceInfo(deviceInfo);
   publishEventRequest.setActivity(data.activity);
-  publishEventRequest.setBusinessId(data.businessId);
+  publishEventRequest.setBusinessId(data.businessId.toString());
   publishEventRequest.setBusinessType(data.businessType);
   publishEventRequest.setEvent(data.event);
   publishEventRequest.setIpAddress(data.ipAddress);
   publishEventRequest.setResource(data.resource);
-  publishEventRequest.setUserId(data.userId);
+  publishEventRequest.setUserId(data.userId.toString());
   return publishEventRequest;
+};
+
+export const createGetManyUsersRequest = (userIdsList) => {
+  const getManyUsersRequest = new GetManyUsersRequest();
+  getManyUsersRequest.setUserIdsList(userIdsList);
+  return getManyUsersRequest;
 };
