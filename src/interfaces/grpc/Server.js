@@ -3,9 +3,8 @@ import { asValue } from "awilix";
 import services from "stubs/todo/service_grpc_pb";
 
 import { getATodo } from "./services";
-import grpcLogger from "./middlewares/logger";
-import ipAddress from "./middlewares/ipAddress";
-import container from "./middlewares/container";
+import { grpcLogger, ipAddress, container } from "./middlewares";
+
 /**
  *
  *

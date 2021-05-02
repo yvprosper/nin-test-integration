@@ -13,7 +13,7 @@ export const createVerifyTokenRequest = (data) => {
   const verifyTokenRequest = new VerifyTokenRequest();
   verifyTokenRequest.setToken(data.token);
   verifyTokenRequest.setTokenType(data.tokenType);
-  verifyTokenRequest.setCurrentUrl(data.setCurrentUrl);
+  verifyTokenRequest.setCurrentUrl(data.currentUrl);
   return verifyTokenRequest;
 };
 
