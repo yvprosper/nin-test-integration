@@ -62,6 +62,13 @@ const config = {
     env: "AUDITLOG_SERVICE_GRPC_HOSTPORT",
     sensitive: true,
   },
+  notificationGrpcHostPort: {
+    doc: "Notification service grpc hostport",
+    format: "*",
+    default: null,
+    env: "NOTIFICATION_SERVICE_GRPC_HOSTPORT",
+    sensitive: false,
+  },
 };
 
 exports.app = config;
