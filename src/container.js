@@ -20,15 +20,15 @@ container.register({
 
 container.register({
   containerMiddleware: asValue(scopePerRequest(container)),
-  restServer: asClass(restServer).singleton(),
+  restServer: asClass(restServer),
   config: asValue(config),
-  router: asFunction(router).singleton(),
+  router: asFunction(router),
 
   // Infrastructure layer
-  logger: asClass(Logger).singleton(),
-  database: asClass(MongoDbManager).singleton(),
-  cache: asFunction(redisManager).singleton(),
-  elasticClient: asFunction(elasticsearchManager).singleton(),
+  logger: asClass(Logger),
+  database: asClass(MongoDbManager),
+  cache: asFunction(redisManager),
+  elasticClient: asFunction(elasticsearchManager),
   models: asValue(models),
   tracing: asValue(tracing),
 
@@ -41,7 +41,7 @@ container.loadModules(
     [
       "infra/repositories/*!(BaseRepository).js",
       {
-        lifetime: Lifetime.SINGLETON,
+        lifetime: Lifetime.SCOPED,
         register: asClass,
       },
     ],
@@ -60,7 +60,7 @@ container.loadModules(
     [
       "app/*/*!(index.js).js",
       {
-        lifetime: Lifetime.SINGLETON,
+        lifetime: Lifetime.SCOPED,
         register: asClass,
       },
     ],
@@ -79,7 +79,7 @@ container.loadModules(
     [
       "infra/services/*.js",
       {
-        lifetime: Lifetime.SINGLETON,
+        lifetime: Lifetime.SCOPED,
         register: asClass,
       },
     ],

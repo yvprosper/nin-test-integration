@@ -8,7 +8,7 @@ const opentracing = require("opentracing");
  * class AuditLogGrpcClient
  */
 class AuditLogGrpcClient {
-  constructor({ config, tracing: { tracer, logSpanError } }) {
+  constructor({ config, tracing: { tracer, logSpanError }, userAgent, ipAddress, currentUser }) {
     this.config = config;
     this.tracer = tracer;
     this.logSpanError = logSpanError;
@@ -17,6 +17,9 @@ class AuditLogGrpcClient {
       this.hostport,
       grpc.credentials.createInsecure()
     );
+    this.userAgent = userAgent;
+    this.ipAddress = ipAddress;
+    this.currentUser = currentUser;
   }
 
   /**
@@ -26,14 +29,25 @@ class AuditLogGrpcClient {
    * @returns {Promise}
    *
    */
-  async logEvent(payload, span) {
+  async publishEvent(payload, span) {
     return new Promise((resolve, reject) => {
       try {
+        const eventPayload = Object.assign(payload, {
+          deviceInfo: {
+            browser: this.userAgent.browser,
+            os: this.userAgent.os,
+            version: this.userAgent.version,
+          },
+          ipAddress: this.ipAddress,
+          businessId: this.currentUser.businessId,
+          businessType: this.currentUser.businessType,
+          userId: this.currentUser._id,
+        });
         const traceContext = {};
         this.tracer.inject(span, opentracing.FORMAT_TEXT_MAP, traceContext);
         const metadata = new grpc.Metadata();
         metadata.add("trace", JSON.stringify(traceContext));
-        const request = createPublishEventRequest(payload);
+        const request = createPublishEventRequest(eventPayload);
         this.client.publishEvent(request, metadata, (error, response) => {
           if (error) {
             reject(error);

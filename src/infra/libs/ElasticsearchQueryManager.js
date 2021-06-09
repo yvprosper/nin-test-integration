@@ -75,8 +75,8 @@ class ElasticsearchQueryManager {
 
   async reIndex({ sourceIndex, sourceIndexQuery = {}, sourceIndexScript = "", destinationIndex }) {
     const { body } = await this.client.reindex({
-      waitForCompletion: true,
-      // refresh: true,
+      waitForCompletion: false,
+      refresh: true,
       body: {
         source: {
           index: sourceIndex,
@@ -158,6 +158,24 @@ class ElasticsearchQueryManager {
       await this.client.indices.create({ index });
       await this.createMapping({ index });
     }
+  }
+
+  async isAliasExists({ index, indexAliasName }) {
+    const { body } = await this.client.indices.existsAlias({ index, name: indexAliasName });
+    return body;
+  }
+
+  async createAliasIndex({ index, indexAliasName }) {
+    if (!(await this.isAliasExists({ index, indexAliasName }))) {
+      const { body } = await this.client.indices.putAlias({ index, name: indexAliasName });
+      return body;
+    }
+    return null;
+  }
+
+  async deleteAliasIndex({ index, indexAliasName }) {
+    const { body } = await this.client.indices.deleteAlias({ index, indexAliasName });
+    return body;
   }
 }
 

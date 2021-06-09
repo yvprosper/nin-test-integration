@@ -41,7 +41,8 @@ class Server {
     app.use(async (ctx, next) => {
       const userAgent = {
         browser: ctx.get("user-agent"),
-        source: ctx.get("user-agent"),
+        os: ctx.get("user-agent"),
+        version: ctx.get("user-agent"),
       };
       ctx.container.register({
         currentUser: asValue({}), // User will be added from auth middleware...
