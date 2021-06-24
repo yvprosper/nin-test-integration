@@ -5,6 +5,43 @@ class ElasticsearchQueryManager {
     this.client = esClient;
   }
 
+  async search({ index, query }, options) {
+    const {
+      page = 1,
+      limit = 20,
+      sourceExcludes = [],
+      sourceIncludes = [],
+      sort = [],
+      highlight = {},
+    } = options;
+    const { body } = await this.client.search({
+      from: (page - 1) * limit,
+      size: limit,
+      sort,
+      _sourceExcludes: sourceExcludes,
+      _sourceIncludes: sourceIncludes,
+      index,
+      body: {
+        query,
+        highlight,
+      },
+    });
+
+    const { hits } = body.hits;
+
+    const docs = hits.map((hit) => {
+      return {
+        doc: hit._source,
+        score: hit._score,
+        highlight: hit.highlight,
+        _id: hit._id,
+        id: hit._id,
+      };
+    });
+
+    return { docs };
+  }
+
   async query({ index, query }, options) {
     const { page = 1, limit = 20, sourceExcludes = [], sourceIncludes = [], sort = [] } = options;
     const { body } = await this.client.search({
@@ -24,14 +61,14 @@ class ElasticsearchQueryManager {
     const totalDocs = total.value;
     const docs = [];
     for (const hit of hits) {
-      docs.push(hit._source);
+      docs.push({ ...hit._source, _id: hit._id, id: hit._id });
     }
     return {
       docs,
       pagination: {
         totalDocs,
-        perPage: limit,
-        currentPage: page,
+        perPage: parseInt(limit, 10),
+        currentPage: parseInt(page, 10),
         totalPages: Math.ceil(totalDocs / limit),
         serialNo: (page - 1) * limit + 1,
         hasPrevPage,
