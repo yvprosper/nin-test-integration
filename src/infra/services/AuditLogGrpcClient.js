@@ -1,6 +1,7 @@
 import grpc from "grpc";
 import { createPublishEventRequest } from "interfaces/grpc/requests";
 import ClientServices from "stubs/auditlog/service_grpc_pb";
+import flatten from "flat";
 
 const opentracing = require("opentracing");
 
@@ -32,6 +33,15 @@ class AuditLogGrpcClient {
   async publishEvent(payload, span) {
     return new Promise((resolve, reject) => {
       try {
+        let auditActivityDetails = "";
+        if (typeof payload.activityDetail === "object" && payload.activityDetail !== null) {
+          auditActivityDetails = JSON.stringify(
+            flatten(payload.activityDetail, {
+              delimiter: "_",
+            })
+          );
+        }
+
         const eventPayload = Object.assign(payload, {
           deviceInfo: {
             browser: this.userAgent.browser,
@@ -42,6 +52,7 @@ class AuditLogGrpcClient {
           businessId: this.currentUser.businessId,
           businessType: this.currentUser.businessType,
           userId: this.currentUser._id,
+          activityDetail: auditActivityDetails,
         });
         const traceContext = {};
         this.tracer.inject(span, opentracing.FORMAT_TEXT_MAP, traceContext);

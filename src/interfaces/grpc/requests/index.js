@@ -30,6 +30,7 @@ export const createPublishEventRequest = (data) => {
   publishEventRequest.setEvent(data.event);
   publishEventRequest.setIpAddress(data.ipAddress);
   publishEventRequest.setResource(data.resource);
+  publishEventRequest.setActivityDetail(data.activityDetail || "");
   publishEventRequest.setUserId(data.userId.toString());
   return publishEventRequest;
 };
