@@ -4,7 +4,7 @@ import DummyClass from "domain/entities/Dummy";
 
 mongoosePaginate.paginate.options = {
   limit: 20,
-  useEstimatedCount: true,
+  useEstimatedCount: false,
   customLabels: {
     totalDocs: "totalDocs",
     docs: "docs",
