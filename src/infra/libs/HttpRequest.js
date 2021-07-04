@@ -1,6 +1,29 @@
 // Documentation - https://github.com/axios/axios#instance-methods
+// eslint-disable-next-line max-classes-per-file
 import axios from "axios";
 import tracing from "infra/tracer/tracer";
+
+class HttpError extends Error {
+  constructor(axiosErrorResponse) {
+    // Calling parent constructor of base Error class.
+    const { status, statusText, headers, config, data } = axiosErrorResponse;
+
+    super(data.message || "Something happened");
+
+    // Maintains proper stack trace for where our error was thrown (only available on V8)
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(this, HttpError);
+    }
+
+    this.name = "HttpError";
+    // Custom debugging information
+    this.status = status;
+    this.statusText = statusText;
+    this.headers = headers;
+    this.config = config;
+    this.data = data;
+  }
+}
 
 class HttpRequest {
   constructor(options = {}) {
@@ -42,7 +65,7 @@ class HttpRequest {
    * @memberof HttpRequest
    */
   addHeaders(headers) {
-    if (typeof headers === "object") {
+    if (typeof headers === "object" && headers !== null) {
       // add header to provided headers
       this.requestOptions.headers = Object.assign(this.requestOptions.headers, headers);
     }
@@ -59,7 +82,7 @@ class HttpRequest {
         return config;
       },
       (error) => {
-        return Promise.reject(error.response);
+        return Promise.reject(new HttpError(error.response));
       }
     );
     // Add a response interceptor
@@ -68,7 +91,7 @@ class HttpRequest {
         return response.data;
       },
       (error) => {
-        return Promise.reject(error.response);
+        return Promise.reject(new HttpError(error.response));
       }
     );
 

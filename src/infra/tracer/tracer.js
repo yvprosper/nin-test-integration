@@ -39,7 +39,8 @@ const tracer = initTracer();
  * @param {*} error
  */
 const logSpanError = (span, error) => {
-  if (error && !error.isOperationalError) {
+  // error && !error.isOperationalError
+  if (error) {
     span.setTag(opentracing.Tags.ERROR, true);
     span.setTag("error_name", error.name);
     span.log({ event: "error", message: { ...error, stack: error.stack } });
