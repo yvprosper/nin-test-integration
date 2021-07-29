@@ -7,9 +7,9 @@ export const queueTopology = (worker) => {
   switch (worker) {
     case "test":
       topology = {
-        queue: `${queuePrefix}.test.queue`,
+        queue: `${queuePrefix}.queue`,
         exchange,
-        routingKey: "test.log",
+        routingKey: `${queuePrefix}.route`,
       };
       break;
 
