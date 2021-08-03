@@ -28,7 +28,7 @@ container.register({
   logger: asClass(Logger),
   database: asClass(MongoDbManager),
   cache: asFunction(redisManager),
-  elasticClient: asFunction(elasticsearchManager),
+  elasticClient: asFunction(elasticsearchManager).singleton(),
   models: asValue(models),
   tracing: asValue(tracing),
 

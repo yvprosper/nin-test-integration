@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-underscore-dangle */
-class MongooseDataPopulate {
+class DataPopulate {
   constructor(data) {
     this._data = data;
   }
@@ -64,4 +64,4 @@ class MongooseDataPopulate {
   }
 }
 
-export default MongooseDataPopulate;
+export default DataPopulate;
