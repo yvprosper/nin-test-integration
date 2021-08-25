@@ -11,7 +11,8 @@ const validator = require("express-joi-validation").createValidator({
 
 const api = makeInvoker(DummyController);
 const router = express.Router();
-/*
+// Remove the @apiIgnore tag when you duplicate this block
+/**
    * @apiIgnore
    * @api {post} /todos Create a todo
    * @apiGroup Todos
