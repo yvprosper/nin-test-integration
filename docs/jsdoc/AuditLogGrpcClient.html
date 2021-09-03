@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: AuthGrpcClient</title>
+    <title>JSDoc: Class: AuditLogGrpcClient</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: AuthGrpcClient</h1>
+    <h1 class="page-title">Class: AuditLogGrpcClient</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>AuthGrpcClient<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>AuditLogGrpcClient<span class="signature">()</span><span class="type-signature"></span></h2>
         
-            <div class="class-description"><p>class AuthGrpcClient</p></div>
+            <div class="class-description"><p>class AuditLogGrpcClient</p></div>
         
     
 </header>
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="AuthGrpcClient"><span class="type-signature"></span>new AuthGrpcClient<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="AuditLogGrpcClient"><span class="type-signature"></span>new AuditLogGrpcClient<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -144,7 +144,7 @@
     
 
     
-    <h4 class="name" id="getManyUsers"><span class="type-signature">(async) </span>getManyUsers<span class="signature">(userIdsList)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    <h4 class="name" id="publishEvent"><span class="type-signature">(async) </span>publishEvent<span class="signature">(payload, span)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
     
 
     
@@ -152,157 +152,7 @@
 
 
 <div class="description">
-    <p>get many users</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>userIdsList</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">*</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="verifyToken"><span class="type-signature">(async) </span>verifyToken<span class="signature">(payload)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>verify a token</p>
+    <p>log an audit</p>
 </div>
 
 
@@ -354,7 +204,30 @@
 
             
 
-            <td class="description last"><p>{ token, tokenType, currentUrl }</p></td>
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>span</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
         </tr>
 
     

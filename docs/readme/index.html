@@ -109,7 +109,7 @@
   background-color: #ffeef0;
 }
 
-</style><h1 id="user-service">User Service</h1>
+</style><h1 id="raw-template">Raw Template</h1>
 <blockquote>
 <p>RESTful/gRPC api with Domain Driven Design</p>
 </blockquote>
@@ -120,8 +120,8 @@
 </ol>
 <h2 id="documentation">Documentation</h2>
 <ol>
-<li>Visit [<a href="http://localhost:30027/rest-api%5D">http://localhost:30027/rest-api]</a> for REST docs</li>
-<li>gRPC documentation should be added at the bottom of this readme. It can be access by visiting <a href="http://localhost:30027/readme">http://localhost:30027/readme</a></li>
+<li>Visit [<a href="http://localhost:30041/rest-api%5D">http://localhost:30041/rest-api]</a> for REST docs</li>
+<li>gRPC documentation should be added at the bottom of this readme. It can be access by visiting <a href="http://localhost:30041/readme">http://localhost:30041/readme</a></li>
 <li>This template documentation can be access by running <code>yarn serve:docs</code> then visit <a href="http://localhost:3000">http://localhost:3000</a></li>
 </ol>
 <h2 id="docker-support">Docker support</h2>
@@ -129,16 +129,16 @@
 <ol>
 <li><a href="https://www.docker.com/products/docker-engine">Docker</a> Community Edition v17 or higher</li>
 </ol>
-<pre><code class="language-sh">$ docker build -t user-service  .
-$ docker run -p 30027:30027 -p 30028:30028 --env-file=.env  user-service
+<pre><code class="language-sh">$ docker build -t raw-template  .
+$ docker run -p 30041:30041 -p 30042:30042 --env-file=.env  raw-template
 </code></pre>
 <p>Access <code>http://localhost:&lt;PORT&gt;</code> and you&#39;re ready to go!</p>
 <blockquote>
-<p><a href="http://localhost:30027/">http://localhost:30027/</a></p>
+<p><a href="http://localhost:30041/">http://localhost:30041/</a></p>
 </blockquote>
 <h2 id="quick-start">Quick Start</h2>
 <ol>
-<li>Clone the repository with <code>git clone --recursive https://github.com/YouverifyHQ/user-service.git</code></li>
+<li>Clone the repository with <code>git clone --recursive https://github.com/YouverifyHQ/raw-template.git</code></li>
 <li>Install the dependencies with <a href="https://yarnpkg.com/en/docs/install/">Yarn</a></li>
 <li>Run local Jaeger for distributed tracing <code>yarn start:jaeger:dev</code></li>
 <li>Run the application in development mode with <code>yarn start:dev:rs</code></li>
