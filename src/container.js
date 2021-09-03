@@ -22,6 +22,7 @@ container.register({
   containerMiddleware: asValue(scopePerRequest(container)),
   restServer: asClass(restServer),
   config: asValue(config),
+  appEnvironment: asValue(config.get("app.env")),
   router: asFunction(router),
 
   // Infrastructure layer

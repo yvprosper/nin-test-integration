@@ -40,7 +40,7 @@ class MongoDbManager {
       process.exit(1);
     });
 
-    if (this.config.get("app.env") === "local") {
+    if (this.config.get("app.env") === "development") {
       mongoose.set("debug", true);
     }
 
