@@ -16,7 +16,7 @@ const config = {
   grpcPort: {
     doc: "The grpc port to bind",
     format: "port",
-    default: 30015,
+    default: null,
     env: "GRPC_PORT",
     sensitive: false,
   },
@@ -36,8 +36,8 @@ const config = {
   },
   env: {
     doc: "The application environment",
-    format: ["production", "development", "test", "qa", "staging", "local"],
-    default: "local",
+    format: ["production", "development", "staging"],
+    default: "development",
     env: "NODE_ENV",
     sensitive: false,
   },
