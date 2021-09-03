@@ -36,7 +36,7 @@ const plugins = () => {
     ],
   ];
 
-  if (["local", "development"].indexOf(process.env.NODE_ENV) === -1) {
+  if (["development"].indexOf(process.env.NODE_ENV) === -1) {
     defaultPlugins.push(["transform-remove-console"]);
   }
 
