@@ -19,7 +19,7 @@ export default (tokenType = "jwt") => {
       // check if request is for the right environment
       if (appEnvironment !== data.user.environment) {
         throw new ForbiddenError(
-          `Unauthorized: You cannot make a request to ${data.user.environment.toUpperCase()} environment from ${appEnvironment.toUpperCase()} environment`,
+          `Unauthorized: You cannot make a request to ${appEnvironment.toUpperCase()} environment from  ${data.user.environment.toUpperCase()} environment`,
           403,
           {
             requestEnvironment: data.user.environment,
