@@ -8,6 +8,7 @@ export const createVerifyTokenRequest = (data) => {
   verifyTokenRequest.setToken(data.token);
   verifyTokenRequest.setTokenType(data.tokenType);
   verifyTokenRequest.setCurrentUrl(data.currentUrl);
+  verifyTokenRequest.setIpAddress(data.ipAddress);
   return verifyTokenRequest;
 };
 
