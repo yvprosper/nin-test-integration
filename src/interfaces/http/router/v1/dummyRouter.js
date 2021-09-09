@@ -50,7 +50,7 @@ const router = express.Router();
    *       "note": "Goto the beach"
    *     }
    * 
-   * @apiHeader {String} accessToken Users unique access token.
+   * @apiHeader {String} authorization Users bearer access token.
    *
    *  @apiUse MyError
   * 
