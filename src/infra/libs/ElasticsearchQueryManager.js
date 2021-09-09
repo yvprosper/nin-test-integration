@@ -197,6 +197,23 @@ class ElasticsearchQueryManager {
     }
   }
 
+  // uncomment and modify the code below if you want to create multiple index and comment out the code above
+  // async createIndex({ transactionIndexName, creditHistoryIndexName }) {
+  //   const [{ body: transactionIndexCheck }, { body: creditHistoryIndexCheck }] = await Promise.all([
+  //     this.client.indices.exists({ index: transactionIndexName }),
+  //     this.client.indices.exists({ index: creditHistoryIndexName }),
+  //   ]);
+
+  //   if (!transactionIndexCheck) {
+  //     await this.client.indices.create({ index: transactionIndexName });
+  //     await this.createMapping({ transactionIndexName });
+  //   }
+  //   if (!creditHistoryIndexCheck) {
+  //     await this.client.indices.create({ index: creditHistoryIndexName });
+  //     await this.createMapping({ creditHistoryIndexName });
+  //   }
+  // }
+
   async isAliasExists({ index, indexAliasName }) {
     const { body } = await this.client.indices.existsAlias({ index, name: indexAliasName });
     return body;

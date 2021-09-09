@@ -28,7 +28,7 @@ container.register({
   // Infrastructure layer
   logger: asClass(Logger),
   database: asClass(MongoDbManager),
-  cache: asFunction(redisManager),
+  cache: asFunction(redisManager).singleton(),
   elasticClient: asFunction(elasticsearchManager).singleton(),
   models: asValue(models),
   tracing: asValue(tracing),
