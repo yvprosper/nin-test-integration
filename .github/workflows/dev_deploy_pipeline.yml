@@ -56,7 +56,9 @@ jobs:
           version: 1.57.0
 
       - name: Build container image
-        run: docker build -t $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7) .
+        run: docker build --build-arg NODE_ENV  -t $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)  .
+        env:
+          NODE_ENV: "development"
 
       - name: Log in to DigitalOcean Container Registry with short-lived credentials
         run: doctl registry login --expiry-seconds 600
@@ -80,7 +82,7 @@ jobs:
 
       - name: Update Kubernetes resources
         run: |
-          cd $(echo $IMAGE_NAME)/kustomize/overlays/development
+          cd youverifyos/services/$(echo $IMAGE_NAME)/kustomize/overlays/development
           kustomize edit set image image-name=$(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
           cat kustomization.yaml
 

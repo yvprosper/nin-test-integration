@@ -42,8 +42,11 @@ COPY --from=builder /usr/src/app/node_modules ./node_modules
 
 COPY . .
 
-RUN NODE_ENV=production yarn build && yarn build:docs
+ARG NODE_ENV=development 
+ENV NODE_ENV=${NODE_ENV}
 
-EXPOSE 30041 30042
+RUN yarn build && yarn build:docs
+
 
 CMD [ "node", "dist/start.js" ]
+
