@@ -1,5 +1,8 @@
+import { asValue } from "awilix";
 import GrpcServer from "interfaces/grpc/Server";
 import ElasticsearchQueryManager from "infra/libs/ElasticsearchQueryManager";
+import redisManager from "infra/database/redisManager";
+import container from "src/container";
 
 class Application {
   constructor({ restServer, database, logger, config, elasticClient }) {
@@ -9,6 +12,7 @@ class Application {
     this.database = database;
     this.elasticClient = elasticClient;
     this.logger = logger;
+    this.config = config;
     this.index = config.get("elasticsearch.indexName");
   }
 
@@ -33,6 +37,13 @@ class Application {
         this.logger.info("elasticsearch cluster is down!");
         throw error;
       }
+    }
+    if (redisManager) {
+      const redisClient = await redisManager({ config: this.config, logger: this.logger });
+
+      container.register({
+        cache: asValue(redisClient),
+      });
     }
     await this.restServer.start();
     await this.grpcServer.start();

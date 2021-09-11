@@ -2,7 +2,6 @@ import { createContainer, asValue, asClass, asFunction, InjectionMode, Lifetime 
 import { scopePerRequest } from "awilix-express";
 import config from "config";
 import MongoDbManager from "infra/database/MongoDbManager";
-import redisManager from "infra/database/redisManager";
 import elasticsearchManager from "infra/database/elasticSearchManager";
 import router from "interfaces/http/router/routes";
 import restServer from "interfaces/http/Server";
@@ -28,7 +27,6 @@ container.register({
   // Infrastructure layer
   logger: asClass(Logger),
   database: asClass(MongoDbManager),
-  cache: asFunction(redisManager).singleton(),
   elasticClient: asFunction(elasticsearchManager).singleton(),
   models: asValue(models),
   tracing: asValue(tracing),

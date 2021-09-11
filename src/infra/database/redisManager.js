@@ -1,26 +1,33 @@
-const asyncRedis = require("async-redis");
-const redis = require("redis");
+import { createClient } from "redis";
 
-const redisManager = ({ config, logger }) => {
+const redisManager = async ({ config, logger }) => {
   logger.info("Connecting to Redis database...");
   const password = config.get("redis.password");
   const isTls = config.get("redis.isTLS");
   const host = config.get("redis.host");
   const port = config.get("redis.port");
   const username = config.get("redis.username");
-  const prefix = config.get("redis.prefixKeyName");
-  const protocol = isTls ? "rediss://" : "redis://";
+  // const prefix = config.get("redis.prefixKeyName");
+  // const protocol = isTls ? "rediss://" : "redis://";
 
-  let redisClient = redis.createClient(`${protocol}${username}:${password}@${host}:${port}`, {
-    prefix,
+  const redisClient = createClient({
+    socket: {
+      tls: isTls,
+      host,
+      port,
+      username,
+      password,
+    },
   });
 
   redisClient.debug_mode = true;
 
-  redisClient = asyncRedis.decorate(redisClient);
-
   redisClient.on("connect", () => {
     logger.info("Connected to Redis");
+  });
+
+  redisClient.on("ready", () => {
+    logger.info("Redis is ready");
   });
   redisClient.on("reconnecting", () => {
     logger.info("Redis is reconnecting...");
@@ -29,8 +36,10 @@ const redisManager = ({ config, logger }) => {
     logger.error(error);
   });
 
+  await redisClient.connect();
+
   return redisClient;
 };
 
-// Releveant documentations - https://www.npmjs.com/package/async-redis
+// Releveant documentations - https://github.com/NodeRedis/node-redis
 export default redisManager;
