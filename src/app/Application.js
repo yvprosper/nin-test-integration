@@ -29,7 +29,7 @@ class Application {
 
         // create index mappings
         const elasticsearchQueryManager = new ElasticsearchQueryManager(this.elasticClient);
-        await elasticsearchQueryManager.createIndex({ index: this.index });
+        await elasticsearchQueryManager.createIndex({ index: this.index }); // you can modify this method to accept multiple elasticsearch index
 
         this.logger.info("Elasticsearch index and mapping created if not exists");
         //  logger.info("Error creating index");
