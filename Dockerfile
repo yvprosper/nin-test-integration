@@ -47,6 +47,9 @@ ENV NODE_ENV=${NODE_ENV}
 
 RUN yarn build && yarn build:docs
 
+EXPOSE 30041 30042
+
+
 
 CMD [ "node", "dist/start.js" ]
 
