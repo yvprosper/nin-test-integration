@@ -12,3 +12,4 @@ yarn-error.log
 /playground
 .vscode
 .nyc_output
+/src/config/testkey.key
